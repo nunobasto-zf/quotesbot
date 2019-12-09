@@ -5,13 +5,13 @@ import scrapy
 class ToScrapeCSSSpider(scrapy.Spider):
     name = "toscrape-css"
     start_urls = [
-        'http://www.amazon.com/TRW-113415061C-Steering-Box-Beetle/dp/B00QXWZI7O',
+        'https://www.amazon.com/TRW-113415061C-Steering-Box-Beetle/dp/B00QXWZI7O',
     ]
 
     def parse(self, response):
-        for product in response.css("div.ppd"):
+        for product in response.css("div.titleSection"):
             yield {
-                'title': product.css("title_feature_div.span.text::text").extract_first(),
+                'title': product.css("span.text::text").extract_first(),
                 #'author': quote.css("small.author::text").extract_first(),
                 #'tags': quote.css("div.tags > a.tag::text").extract()
             }
